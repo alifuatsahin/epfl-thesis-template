@@ -53,15 +53,6 @@
     paper: "a4",
     margin: (x: 25mm, y: 25mm, top: 30mm),
     numbering: "i",
-    
-    // FOOTER: Only show in Front Matter (Roman numerals)
-    footer: context {
-      if not is-main-matter.at(here()) {
-        set align(center)
-        set text(size: 11pt, font: main-font)
-        counter(page).display()
-      }
-    },
 
     // HEADER: Only show in Main Matter (Arabic numerals + Chapter name)
     header: context {
@@ -170,7 +161,7 @@
     } else {
       // Color the number part of the reference
       let supp = el.supplement
-      let num = context numbering(el.numbering, ..el.counter.at(it.target))
+      let num = context numbering(el.numbering, ..counter(heading).at(it.target))
       link(it.target)[#supp~#text(fill: ref-color, num)]
     }
   }
@@ -459,16 +450,18 @@
   ]
 }
 
-#let mainmatter() = [
-  #is-main-matter.update(true)
-  #pagebreak(weak: true)
-  #counter(page).update(1)
-  #set page(numbering: "1")
-]
+#let mainmatter(body) = {
+  is-main-matter.update(true)
+  pagebreak(weak: true)
+  counter(page).update(1)
+  set page(numbering: "1", footer: none)
+  body
+}
 
-#let frontmatter() = [
-  #is-main-matter.update(false)
-  #pagebreak(weak: true)
-  #counter(page).update(1)
-  #set page(numbering: "i")
-]
+#let frontmatter(body) = {
+  is-main-matter.update(false)
+  pagebreak(weak: true)
+  counter(page).update(1)
+  set page(numbering: "i")
+  body
+}

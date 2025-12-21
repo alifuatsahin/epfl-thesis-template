@@ -33,11 +33,13 @@ For example, here is a new paragraph containing two aligned equations:
 $
   e^(pi i) & = -1 #<eulers_formula> \
     (n+1)! & = integral_0^infinity t^n e^(-t) dif t #<cauchy_factorial>
-// $
-// Here @eulers_formula is Euler's formula, and @cauchy_factorial is Cauchy's formula for a factorial. Note that the ability to refer to them individually is via the `equate` package. Additionally, here is a single-lined equation:
-// $
+$
+Here @eulers_formula is Euler's formula, and @cauchy_factorial is Cauchy's formula for a factorial. Note that the ability to refer to them individually is via the `equate` package. Additionally, here is a single-lined equation:
+
+$
   a^2 + b^2 = c^2
 $ <eq:pythagoras>
+
 To specify quantities (with units) and uncertainties, please refer to the `unify` and `zero` packages.
 
 == Page layout
@@ -92,13 +94,13 @@ Tables and images can be inserted into the document via the `#figure` function. 
 
 == Referencing stuff <sec:refs>
 
-// Tables, Figures and Equations are numbered by section. When refering to one of these items, the number becomes green (color is customizable). For example, this is @sec:refs and the afterwards we have @subsec:chem. For figures, it is possible to attach an additional supplement to a figure, for example @fig:large-image could have subpanels like @fig:large-image[a], which you can specify via ```typ @fig:label[a]```.
-// References are formatted as @yamanaka_nanoscale_2000. Several references are joined according to @asmatulu_characterization_2019@binnig_atomic_1986@boussinesq_application_1885.
+Tables, Figures and Equations are numbered by section. When refering to one of these items, the number becomes green (color is customizable). For example, this is @sec:refs and the afterwards we have @subsec:chem. For figures, it is possible to attach an additional supplement to a figure, for example @fig:large-image could have subpanels like @fig:large-image[a], which you can specify via ```typ @fig:label[a]```. 
+
+References are formatted as @yamanaka_nanoscale_2000. Several references are joined according to @asmatulu_characterization_2019 @binnig_atomic_1986 @boussinesq_application_1885.
 
 === Chemical formula <subsec:chem>
 
 Here is a chemical formula: #chem[H2O]. This works via a simple function ```typ #chem``` which subscripts all numbers.
-
 
 == Fonts
 

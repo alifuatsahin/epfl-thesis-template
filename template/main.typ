@@ -40,12 +40,11 @@
   font-type: "Segoe UI" // or any other font you prefer (e.g., "Suisse Int'l" if you want to get the template look. (Default: "Segoe UI")
 )
 
-#frontmatter()
+#show: frontmatter
 
 #outline(indent: auto)
 
-#mainmatter()
-#set page(numbering: "1")
+#show: mainmatter
 
 // 4. Content
 #include "./sections/0-default.typ" // Comment out this line when you start writing
@@ -54,3 +53,13 @@
 #include "./sections/3-methodology.typ"
 #include "./sections/4-results.typ"
 #include "./sections/5-conclusion.typ"
+
+#bibliography(
+  "references.bib",
+  title: [References],
+  style: "american-physics-society",
+)
+
+#show: appendix
+
+#include "sections/6-appendix.typ"
