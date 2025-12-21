@@ -94,7 +94,7 @@ Refer to the `template/sections/` folder for a modular way to organize your thes
 
 This template includes the "Suisse Int'l" font family (EPFL's branding font) and various versions of the EPFL logo (black, white, red) located in `src/epfl/`. 
 
-To use these fonts locally with the Typst CLI:
+If you have the fonts and want to use these fonts locally with the Typst CLI:
 ```bash
 typst compile main.typ --font-path ./src/epfl
 ```
