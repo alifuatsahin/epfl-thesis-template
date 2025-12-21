@@ -1,0 +1,15 @@
+[package]
+name = "epfl-thesis"
+version = "0.1.0"
+entrypoint = "src/lib.typ"
+authors = ["Ali Fuat Sahin"]
+license = "MIT"
+description = "A sleek, unofficial EPFL thesis or report template for Typst."
+repository = "https://github.com/yourusername/epfl-thesis"
+keywords = ["book", "academic", "epfl", "thesis"]
+categories = ["paper", "report", "book"]
+
+[template]
+path = "template"
+entrypoint = "main.typ"
+thumbnail = "thumbnail.png"
