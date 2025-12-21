@@ -25,12 +25,12 @@ The fastest way to start your thesis is using the Typst CLI:
    Clone this repo into your local Typst packages folder:
    ```bash
    # macOS/Linux
-   git clone https://github.com/yourusername/epfl-thesis.git ~/.local/share/typst/packages/local/epfl-thesis/0.1.0
+   git clone https://github.com/yourusername/epfl-thesis.git ~/.local/share/typst/packages/preview/epfl-thesis/0.1.0
    ```
 
 2. **Initialize project:**
    ```bash
-   typst init @local/epfl-thesis:0.1.0 my-thesis
+   typst init @preview/epfl-thesis:0.1.0 my-thesis
    cd my-thesis
    ```
 
@@ -58,7 +58,7 @@ The fastest way to start your thesis is using the Typst CLI:
 In your `main.typ`, the template is initialized using the `base` show rule:
 
 ```typst
-#import "@local/epfl-thesis:0.1.0": *
+#import "@preview/epfl-thesis:0.1.0": *
 
 #show: base.with(
   doc-type: "book", // "book" or "article"
