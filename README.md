@@ -1,104 +1,124 @@
-# Unofficial EPFL Typst Academic Template
+# 🎓 Unofficial EPFL Typst Academic Template
+
+[![Typst Version](https://img.shields.io/badge/Typst-0.12.0+-0074D9.svg)](https://typst.app)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 A professional, modern Typst template for theses, reports, and articles. While styled after the **EPFL (École Polytechnique Fédérale de Lausanne)** visual identity, this is an **unofficial** template and is not endorsed by the institution.
 
-## ⚠️ Disclaimer & License
-* **Disclaimer:** This template is **not** officially associated with EPFL.
-* **License:** Licensed under the **MIT License**.
-* **Fonts:** All required fonts (Suisse Int'l, Suisse Int'l Mono, etc.) are provided in the `src/epfl` directory.
+[**View Demo PDF**](#) | [**Report a Bug**](https://github.com/yourusername/epfl-thesis/issues)
 
 ---
 
-## Installation (Local Package)
+## ✨ Previews
 
-To use this template as a library across multiple projects, install it as a local package:
+| Cover Page | Title & Table of Contents |
+| :---: | :---: |
+| ![Cover Page](https://via.placeholder.com/300x400?text=Cover+Page+Screenshot) | ![Title Page](https://via.placeholder.com/300x400?text=Internal+Page+Screenshot) |
+| *Modern branding with full-page imagery* | *Clean typography and structured layout* |
 
-1. **Locate your local package directory:**
-   - **macOS:** `~/Library/Application Support/typst/packages/local/`
-   - **Windows:** `%APPDATA%\typst\packages\local\`
-   - **Linux:** `~/.local/share/typst/packages/local/`
+---
 
-2. **Create the versioned folder:**
-   Create a folder named `epfl-thesis/0.1.0/` inside the `local` directory.
+## 🚀 Quick Start
 
-3. **Copy files:**
-   Place the `src/` folder, `template/` folder, and `typst.toml` into that directory.
+The fastest way to start your thesis is using the Typst CLI:
 
-4. **Initialize a project:**
-   You can now start a new project instantly using:
+1. **Install locally:**
+   Clone this repo into your local Typst packages folder:
+   ```bash
+   # macOS/Linux
+   git clone https://github.com/yourusername/epfl-thesis.git ~/.local/share/typst/packages/local/epfl-thesis/0.1.0
+   ```
+
+2. **Initialize project:**
    ```bash
    typst init @local/epfl-thesis:0.1.0 my-thesis
+   cd my-thesis
+   ```
+
+3. **Compile:**
+   ```bash
+   typst watch main.typ --font-path ./src/epfl
    ```
 
 ---
 
-## Project Structure
+## 🛠 Features
 
-```text
-.
-├── typst.toml          # Package metadata
-├── src/                # Library logic
-│   ├── lib.typ         # Main library entrypoint
-│   ├── template.typ    # Layout definitions
-│   └── epfl/           # Assets (Logos & Fonts)
-├── template/           # Boilerplate for users
-│   ├── main.typ        # Main document entrypoint
-│   └── sections/       # Example content (Introduction, etc.)
-└── README.md
-```
+- **🎯 Dual Modes:** Toggle between `doc-type: "book"` (for theses with chapters) and `doc-type: "article"` (for semester reports/papers).
+- **🧪 Science-Ready:**
+    - `chem()`: Effortless chemical formulas via `chem[H2O]`.
+    - `wrap-content()`: Advanced figure wrapping where captions intelligently match image widths.
+- **🎨 EPFL Identity:** Includes official Swiss Red color schemes and "Suisse Int'l" font integration.
+- **📚 Modular Structure:** Pre-organized folder structure for sections, references, and appendices.
+- **🔢 Automatic Numbering:** Handles complex appendix numbering (A.1, B.2) automatically.
 
 ---
 
-## Usage
+## 📖 Usage Guide
 
-If you use `typst init`, it will generate a `main.typ` for you. To use the library functions manually:
+In your `main.typ`, the template is initialized using the `base` show rule:
 
 ```typst
 #import "@local/epfl-thesis:0.1.0": *
 
 #show: base.with(
-  doc-type: "book",
-  title: "My Research",
-  name: "Your Name",
+  doc-type: "book", // "book" or "article"
+  title: "Neural Network Optimization in Cryo-EM",
+  name: "Claude Shannon",
+  supervisor: "Prof. Jane Doe",
+  date: "December 2023",
 )
 
-// Helpers provided by the template
+// Generate the high-impact cover
 #makecoverpage(
-  title: "A Study in Typst", 
-  name: "Ali Fuat Sahin", 
-  img: "src/epfl/rlc-cover2.jpg"
+  title: "Neural Network Optimization", 
+  name: "Claude Shannon", 
+  img: image("src/epfl/rlc-cover2.jpg")
 )
 
-#maketitlepage(
-  title: "A Study in Typst",
-  name: "Ali Fuat Sahin",
-  supervisor: "Prof. Jane Doe"
-)
+// Standard institutional title page
+#maketitlepage()
+
+#outline(indent: auto)
 
 = Introduction
-Refer to the `template/sections/` folder for a modular way to organize your thesis.
+Your research starts here...
+```
+
+### Key Parameters (`base` function)
+| Parameter | Type | Default | Description |
+| :--- | :--- | :--- | :--- |
+| `doc-type` | string | `"book"` | Changes layout between thesis/report styles. |
+| `title` | string | (required) | The main title of your document. |
+| `author` | string | (required) | Your full name. |
+| `accent-color` | color | `rgb("#FF0000")` | The primary theme color (EPFL Red). |
+
+---
+
+## 📂 Project Structure
+
+```text
+.
+├── typst.toml          # Package metadata
+├── src/                # Logic & Assets
+│   ├── lib.typ         # API Entrypoint
+│   ├── template.typ    # Styling & Layout rules
+│   └── epfl/           # Fonts (.otf) and Logos (.svg)
+├── template/           # Starter Kit
+│   ├── main.typ        # Main file to compile
+│   ├── references.bib  # Bibliography
+│   └── sections/       # Separate .typ files for chapters
+└── README.md
 ```
 
 ---
 
-## Features
+## ⚠️ Disclaimer & Fonts
 
-- **Dual Modes:** Use `doc-type: "book"` for chapters/theses or `doc-type: "article"` for reports.
-- **Scientific Utilities:**
-    - `chem()`: Automatic chemical formula formatting (e.g., `chem[H2O]`).
-    - `wrap-content()`: Advanced image wrapping where captions automatically match the figure width.
-- **EPFL Branding:** Pre-configured cover pages, title pages, and institutional colors.
-- **Appendices:** A dedicated `#appendix()` environment that resets counters and handles "A.1" numbering.
+*   **Disclaimer:** This project is **not** officially affiliated with EPFL. It is a community-driven tool to help students produce beautiful documents.
+*   **Fonts:** To strictly follow EPFL branding, this template uses **Suisse Int'l**. These are included in `src/epfl`. When compiling via CLI, remember to use `--font-path ./src/epfl`.
 
-## Fonts & Logos
+## 📄 License
 
-This template includes the "Suisse Int'l" font family (EPFL's branding font) and various versions of the EPFL logo (black, white, red) located in `src/epfl/`. 
-
-If you have the fonts and want to use these fonts locally with the Typst CLI:
-```bash
-typst compile main.typ --font-path ./src/epfl
-```
-
-## License 
-
-This work is based on [EPFL-Report-Template](https://github.com/Vector04/tudelft-thesis-template/tree/master) and [tudelft-thesis-template](https://github.com/batuhanfaik/EPFL-Report-Template) and licensed under MIT license.
+Based on [EPFL-Report-Template](https://github.com/batuhanfaik/EPFL-Report-Template) and [tudelft-thesis-template](https://github.com/Vector04/tudelft-thesis-template).
+Licensed under the **MIT License**.
