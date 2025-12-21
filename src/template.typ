@@ -9,6 +9,7 @@
 #let huge = 25pt
 
 #let in-appendix-part = state("in-appendix-part", false)
+#let is-main-matter = state("is-main-matter", false)
 
 #let school = "École Polytechnique Fédérale de Lausanne"
 
@@ -33,6 +34,7 @@
   region: "GB",
   body,
 ) = {
+  let is-book = doc-type == "book"
   
   /* --- 1. General Document Setup --- */
   set document(title: title, author: name)
@@ -51,29 +53,44 @@
     paper: "a4",
     margin: (x: 25mm, y: 25mm, top: 30mm),
     numbering: "i",
+    
+    // FOOTER: Only show in Front Matter (Roman numerals)
+    footer: context {
+      if not is-main-matter.at(here()) {
+        set align(center)
+        set text(size: 11pt, font: main-font)
+        counter(page).display()
+      }
+    },
+
+    // HEADER: Only show in Main Matter (Arabic numerals + Chapter name)
     header: context {
-      // Don't show header on title pages or start of chapters
+      let main = is-main-matter.at(here())
       let curr-page = here().page()
-      let is-chapter-page = query(heading.where(level: 1))
-        .any(it => it.location().page() == curr-page)
+
+      let headings-on-page = query(heading.where(level: 1))
+        .filter(it => it.location().page() == curr-page)
       
-      if curr-page > 1 and not is-chapter-page {
-        let headings = query(heading.where(level: 1).before(here()))
-        if headings.len() > 0 {
-          let last = headings.last()
-          let num = if last.numbering != none {
-            counter(heading).at(last.location()).at(0)
-          }
-          
+      let is-chapter-page = headings-on-page.len() > 0
+
+      let target-heading = if is-chapter-page {
+        headings-on-page.first()
+      } else {
+        query(heading.where(level: 1).before(here())).at(-1, default: none)
+      }
+      
+      // Only show header if we are in main matter AND not on a chapter start page
+      if main and curr-page > 1 and (not is-chapter-page or not is-book) {
+        if target-heading != none {
           set text(size: 11pt, font: main-font, weight: "bold")
           stack(
             dir: ltr,
-            last.body,
+            target-heading.body,
             h(1fr),
-            // rightheader
             counter(page).display(),
           )
-          line(length: 100%, stroke: 1pt)
+          v(-0.5em)
+          line(length: 100%, stroke: 0.5pt)
         }
       }
     }
@@ -85,7 +102,6 @@
   show regex(" - "): [ #sym.dash ]
 
   /* --- 4. Heading & Numbering Logic --- */
-  let is-book = doc-type == "book"
   let head-num = if is-book { "1.1.1" } else { "1.1" }
   let eq-num = if is-book { (..n) => numbering("(1.1)", counter(heading).get().first(), ..n) } 
                else { (..n) => numbering("(1)", ..n) }
@@ -103,39 +119,39 @@
     if not is-book { return it }
     set text(size: 1.1em, weight: "semibold", font: main-font)
   }
-  //     ]
-  //   } else { it }
-  // }
 
   // Chapter Logic (Level 1)
   show heading.where(level: 1): it => {
-    if not is-book { return it }
-    
-    // Reset counters for sections on new chapters
-    counter(math.equation).update(0)
-    counter(figure.where(kind: image)).update(0)
-    counter(figure.where(kind: table)).update(0)
+    context {
+      let main = is-main-matter.get()
+      
+      if is-book or not main {
+        // Reset counters for sections on new chapters
+        counter(math.equation).update(0)
+        counter(figure.where(kind: image)).update(0)
+        counter(figure.where(kind: table)).update(0)
 
-    pagebreak(weak: true)
-    v(3em)
-    
-    // Wrap everything in a right-aligned block
-    align(right)[
-      // 1. The Number (Top)
-      #if it.numbering != none {
-        set text(size:6em, weight: "bold", font: main-font)
-        // We use context to get the current heading number
-        context counter(heading).display(it.numbering)
+        pagebreak(weak: true)
+        v(3em)
+        
+        align(right)[
+          #if it.numbering != none {
+            set text(size: 6em, weight: "bold", font: main-font)
+            counter(heading).display(it.numbering)
+          }
+
+          #block(width: 100%)[
+            #set text(size: 2em, weight: "bold")
+            #it.body
+          ]
+        ]
+        v(3em)
+      } else {
+        v(1.5em, weak: true)
+        it
+        v(1em, weak: true)
       }
-
-      // 2. The Title (Bottom)
-      #block(width: 100%)[
-        #set text(size: 2em, weight: "bold")
-        #it.body
-      ]
-    ]
-    
-    v(3em)
+    }
   }
 
   /* --- 5. References & Citations --- */
@@ -159,7 +175,7 @@
     }
   }
 
-/* --- 6. Figures & Tables --- */
+  /* --- 6. Figures & Tables --- */
   let figure-gap = 1.5em // Adjust this for more/less space around images
 
   show figure: it => {
@@ -210,11 +226,11 @@
 
   /* --- 7. Table of Contents (Outline) --- */
   show outline.entry.where(level: 1): it => {
-    // v(1.5em, weak: true)
+    v(1.5em, weak: true)
     strong(it)
   }
   
-  // set outline(indent: 2em, fill: repeat([#h(4pt) . #h(4pt)]))
+  set outline(indent: 2em)
 
   /* --- 8. Lists --- */
   set list(
@@ -240,7 +256,6 @@
   
   counter(heading).update(0)
 
-  // We use context to get the current chapter letter safely
   set math.equation(numbering: n => {
     context {
       let chap = counter(heading).at(here()).first()
@@ -265,8 +280,6 @@
   size: auto,
   ..grid-kwargs,
 ) = {
-  // Modifying the wrap-content function from the wrap-it package for extra styling.
-  // Wrap caption to figure width and text align left
 
   show figure: it => {
     let w = measure(it.body).width
@@ -445,3 +458,17 @@
     #v(1em)
   ]
 }
+
+#let mainmatter() = [
+  #is-main-matter.update(true)
+  #pagebreak(weak: true)
+  #counter(page).update(1)
+  #set page(numbering: "1")
+]
+
+#let frontmatter() = [
+  #is-main-matter.update(false)
+  #pagebreak(weak: true)
+  #counter(page).update(1)
+  #set page(numbering: "i")
+]
