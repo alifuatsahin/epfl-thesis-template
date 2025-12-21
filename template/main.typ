@@ -15,7 +15,7 @@
 
 // 2. Setup the Document Base logic
 #show: base.with(
-  doc-type: "book", // article, book
+  doc-type: "book", // report, book
   title: "Title of The Thesis",
   name: "Author Name",
   main-font: "Segoe UI", // or any other font you prefer (e.g., "Suisse Int'l" if you want to get the template look.)
