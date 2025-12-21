@@ -98,3 +98,7 @@ If you have the fonts and want to use these fonts locally with the Typst CLI:
 ```bash
 typst compile main.typ --font-path ./src/epfl
 ```
+
+## License 
+
+This work is based on [EPFL-Report-Template](https://github.com/Vector04/tudelft-thesis-template/tree/master) and [tudelft-thesis-template](https://github.com/batuhanfaik/EPFL-Report-Template) and licensed under MIT license.
