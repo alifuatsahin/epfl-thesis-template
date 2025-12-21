@@ -5,16 +5,15 @@
 
 A professional, modern Typst template for theses, reports, and articles. While styled after the **EPFL (École Polytechnique Fédérale de Lausanne)** visual identity, this is an **unofficial** template and is not endorsed by the institution.
 
-[**View Demo PDF**](#) | [**Report a Bug**](https://github.com/yourusername/epfl-thesis/issues)
+[**View Demo PDF**](#) | [**Report a Bug**](https://github.com/alifuatsahin/epfl-thesis-template/issues)
 
 ---
 
 ## ✨ Previews
 
-| Cover Page | Title & Table of Contents |
-| :---: | :---: |
-| ![Cover Page](https://via.placeholder.com/300x400?text=Cover+Page+Screenshot) | ![Title Page](https://via.placeholder.com/300x400?text=Internal+Page+Screenshot) |
-| *Modern branding with full-page imagery* | *Clean typography and structured layout* |
+| Cover Page | Title Page | Main Text (Book) | Main Text (Report) |
+| :---: | :---: | :---: | :---: |
+| <img src="assets/preview-cover.png" width="250"> | <img src="assets/preview-title.png" width="250"> | <img src="assets/preview-book.png" width="250"> | <img src="assets/preview-report.png" width="250"> |
 
 ---
 
@@ -116,7 +115,7 @@ Your research starts here...
 ## ⚠️ Disclaimer & Fonts
 
 *   **Disclaimer:** This project is **not** officially affiliated with EPFL. It is a community-driven tool to help students produce beautiful documents.
-*   **Fonts:** To strictly follow EPFL branding, this template uses **Suisse Int'l**. These are included in `src/epfl`. When compiling via CLI, remember to use `--font-path ./src/epfl`.
+*   **Fonts:** To strictly follow EPFL branding, this template (optionally) uses **Suisse Int'l**.
 
 ## 📄 License
 
