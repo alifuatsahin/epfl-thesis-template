@@ -18,8 +18,12 @@
 #let project-duration = "Feb 2025 - June 2025" // Your Project Duration Here
 #let degree = "Master of Science in Mechanical Engineering" // Your Degree Here
 #let defense-date = datetime(day: 30, month: 6, year: 2025).display("[day] [month repr:long] [year]") // Your Defense Date Here
+#let thesis-type = none // e.g., Bachelor's Thesis, Master's Thesis, PhD Thesis, Semester Project etc. (Leave as 'none' if you don't want to include it)
+#let defense-statement = "to be defended publicly on" // Statement before the defense date
 
-#let supervisor-name = "Prof. Dr. Bugra Koku" // Your Supervisor's Name Here
+#let supervisor-names = (
+  [Prof. Dr. A. Bugra Koku],
+) // Your Supervisor's Name Here
 #let thesis-committee-names = (
   [Prof. Dr. Eres Soylemez],
   [Prof. Dr. Turgut Tumer],
@@ -53,11 +57,13 @@
   url: portfolio-url,
   student-number: student-number,
   project-duration: project-duration,
-  supervisor: supervisor-name,
+  supervisors: supervisor-names,
   thesis-committee: thesis-committee-names,
   font-type: main-font,
   defense-date: defense-date,
   degree: degree,
+  thesis-type: thesis-type,
+  defense-statement: defense-statement,
 )
 
 #show: frontmatter

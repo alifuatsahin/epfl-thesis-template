@@ -372,13 +372,17 @@
   defense-date: datetime.today().display("[day] [month repr:long] [year]"),
   student-number: none,
   project-duration: none,
-  supervisor: none,
+  supervisors: (), // Expected as a list of strings or pairs
   thesis-committee: (), // Expected as a list of strings or pairs
   publicity-statement: "An electronic version of this thesis is available at",
+  defense-statement: "to be defended publicly on",
+  thesis-type: none,
   font-type: "Segoe UI",
 ) = {
   set page(numbering: none, footer: none, margin: 2.5cm)
   set text(font: font-type, lang: "en")
+  let supervisors = if type(supervisors) == array { supervisors } else { (supervisors,) }
+  let thesis-committee = if type(thesis-committee) == array { thesis-committee } else { (thesis-committee,) }
 
   // 1. Header / Top Section
   align(center)[
@@ -400,17 +404,21 @@
     
     #v(2em)
     #text(size: 12pt, font: font-type)[
-      to obtain the degree of #degree \
+      #if thesis-type != none {
+        strong(thesis-type)
+        [\ ]
+      }
+      #if degree != none [
+        to obtain the degree of #degree \
+      ]
       at the #school \
-      to be defended publicly on #defense-date
+      #defense-statement #defense-date
     ]
     
-    // 2. Metadata Section (Student Info & Committee)
+    // Metadata Section (Student Info & Committee)
     #v(2fr) 
 
-    // This 'align' centers the whole block horizontally
     #align(center)[
-      // The 'block' ensures the grid only takes as much space as it needs
       #block(width: auto)[
         #set align(left) // Keep text inside the block left-aligned
         #set text(size: 11pt)
@@ -420,18 +428,41 @@
           column-gutter: 2.5em,
           row-gutter: 0.8em,
           
-          strong("Student number:"), [#student-number],
-          strong("Project duration:"), [#project-duration],
-          strong("Supervisor:"), [#supervisor],
+          ..if student-number != none {
+            (
+            strong("Student number:"), 
+            [#student-number],
+            )
+          },
+
+          ..if project-duration != none {
+            (
+            strong("Project duration:"), 
+            [#project-duration],
+            )
+          },
+
+          // Conditional spreading for Supervisors
+          ..if supervisors.len() > 1 {
+            (
+              strong("Supervisors:"), 
+              stack(spacing: 0.8em, ..supervisors.map(member => [#member]))
+            )
+          }
+          else if supervisors.len() == 1 {
+            (
+              strong("Supervisor:"), 
+              [#supervisors.first()]
+            )
+          },
           
-          // Thesis Committee Label
-          strong("Thesis committee:"), 
-          
-          // Committee Members list
-          stack(
-            spacing: 0.8em,
-            ..thesis-committee.map(member => [#member])
-          )
+          // Conditional spreading for Committee
+          ..if thesis-committee.len() > 0 {
+            (
+              strong("Thesis committee:"),
+              stack(spacing: 0.8em, ..thesis-committee.map(member => [#member]))
+            )
+          }
         )
       ]
     ]
