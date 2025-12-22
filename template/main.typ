@@ -16,6 +16,8 @@
 #let portfolio-url = "https://your-portfolio-link.com" // Your Portfolio or Personal Website URL Here
 #let student-number = "123456" // Your Student Number Here
 #let project-duration = "Feb 2025 - June 2025" // Your Project Duration Here
+#let degree = "Master of Science in Mechanical Engineering" // Your Degree Here
+#let defense-date = datetime(day: 30, month: 6, year: 2025) // Your Defense Date Here
 
 #let supervisor-name = "Prof. Dr. Bugra Koku" // Your Supervisor's Name Here
 #let thesis-committee-names = (
@@ -53,7 +55,9 @@
   project-duration: project-duration,
   supervisor: supervisor-name,
   thesis-committee: thesis-committee-names,
-  font-type: main-font
+  font-type: main-font,
+  defense-date: defense-date,
+  degree: degree,
 )
 
 #show: frontmatter
