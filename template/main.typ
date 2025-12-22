@@ -17,7 +17,7 @@
 #let student-number = "123456" // Your Student Number Here
 #let project-duration = "Feb 2025 - June 2025" // Your Project Duration Here
 #let degree = "Master of Science in Mechanical Engineering" // Your Degree Here
-#let defense-date = datetime(day: 30, month: 6, year: 2025) // Your Defense Date Here
+#let defense-date = datetime(day: 30, month: 6, year: 2025).display("[day] [month repr:long] [year]") // Your Defense Date Here
 
 #let supervisor-name = "Prof. Dr. Bugra Koku" // Your Supervisor's Name Here
 #let thesis-committee-names = (
