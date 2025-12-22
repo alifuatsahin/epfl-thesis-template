@@ -340,14 +340,15 @@
       breakable: false
     )[
       #set align(left)
+      #set par(justify: false)
       #stack(
         spacing: 2em,
-        text(fill: white, size: 40pt, weight: "bold", font: font-type)[#title],
+        text(fill: white, size: 40pt, weight: "bold", font: font-type, hyphenate: false)[#title],
         if subtitle != none {
-          text(fill: white, size: 20pt, weight: "light", font: font-type)[#subtitle]
+          text(fill: white, size: 20pt, weight: "light", font: font-type, hyphenate: false)[#subtitle]
         },
         // line(length: 10%, stroke: 2pt + white),
-        text(fill: white, size: 24pt, weight: "extralight", font: font-type)[#name]
+        text(fill: white, size: 24pt, weight: "extralight", font: font-type, hyphenate: false)[#name]
       )
     ]
   ]
@@ -389,11 +390,28 @@
     #v(1fr)
     
     // Title Section
-    #text(size: 40pt, weight: "extralight", font: font-type)[#title]
+    #block(width: 100%)[
+      #set par(justify: false)
+      #text(
+        size: 40pt, 
+        weight: "extralight", 
+        font: font-type, 
+        hyphenate: false // Prevents breaking words in two
+      )[#title]
+    ]
     
     #if subtitle != none {
-      v(0.5em)
-      text(size: 24pt, weight: "light", fill: gray.darken(50%), font: font-type)[#subtitle]
+      v(2em)
+      block(width: 100%)[
+        #set par(justify: false) // Prevents the gaps between words
+        #text(
+          size: 24pt, 
+          weight: "light", 
+          fill: gray.darken(50%), 
+          font: font-type,
+          hyphenate: false
+        )[#subtitle]
+      ]
     }
     
     #v(2em)
