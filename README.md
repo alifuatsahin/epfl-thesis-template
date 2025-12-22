@@ -2,95 +2,96 @@
 
 [![Typst Version](https://img.shields.io/badge/Typst-0.12.0+-0074D9.svg)](https://typst.app)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/alifuatsahin/epfl-thesis-template/pulls)
 
 A professional, modern Typst template for theses, reports, and articles. While styled after the **EPFL (École Polytechnique Fédérale de Lausanne)** visual identity, this is an **unofficial** template and is not endorsed by the institution.
 
-[**View Demo PDF**](https://github.com/alifuatsahin/epfl-thesis-template/blob/main/template/main.pdf) | [**Report a Bug**](https://github.com/alifuatsahin/epfl-thesis-template/issues)
+[**📂 View Demo PDF**](https://github.com/alifuatsahin/epfl-thesis-template/blob/main/template/main.pdf) | [**🐞 Report a Bug**](https://github.com/alifuatsahin/epfl-thesis-template/issues) | [**✨ Request Feature**](https://github.com/alifuatsahin/epfl-thesis-template/issues)
 
 ---
 
 ## ✨ Previews
+*Click on any image to view the full PDF.*
 
 | Cover Page | Title Page | Main Text (Book) | Main Text (Report) |
 | :---: | :---: | :---: | :---: |
-| <img src="assets/preview-cover.png" width="250"> | <img src="assets/preview-title.png" width="250"> | <img src="assets/preview-book.png" width="250"> | <img src="assets/preview-report.png" width="250"> |
+| [![Cover](assets/preview-cover.png)](./template/main.pdf) | [![Title](assets/preview-title.png)](./template/main.pdf) | [![Book](assets/preview-book.png)](./template/main.pdf) | [![Report](assets/preview-report.png)](./template/main.pdf) |
 
 ---
 
 ## 🚀 Quick Start
 
-The fastest way to start your thesis is using the Typst CLI:
+### 🌐 Using Typst Web App
+1. Create a new project on [Typst.app](https://typst.app).
+2. Click on **Packages** and search for `modern-epfl-thesis`.
+3. Select **Create project from this template**.
 
-1. **Install locally:**
-   Clone this repo into your local Typst packages folder:
-   ```bash
-   # macOS/Linux
-   git clone https://github.com/alifuatsahin/epfl-thesis-template.git ~/.local/share/typst/packages/preview/modern-epfl-thesis/0.1.0
-   ```
+### 💻 Using Typst CLI
+If the package is not yet on the official `@preview` registry, install it locally:
 
-2. **Initialize project:**
-   ```bash
-   typst init @preview/modern-epfl-thesis:0.1.0 my-thesis
-   cd my-thesis
-   ```
+```bash
+# 1. Clone to local packages (macOS/Linux)
+git clone https://github.com/alifuatsahin/epfl-thesis-template.git ~/.local/share/typst/packages/preview/modern-epfl-thesis/0.1.0
 
-3. **Compile:**
-   ```bash
-   typst watch main.typ
-   ```
+# 1. Clone to local packages (Windows PowerShell)
+git clone https://github.com/alifuatsahin/epfl-thesis-template.git $env:APPDATA\typst\packages\preview\modern-epfl-thesis\0.1.0
+
+# 2. Initialize and Compile
+typst init @preview/modern-epfl-thesis:0.1.0 my-thesis
+cd my-thesis
+typst watch main.typ
+```
 
 ---
 
 ## 🛠 Features
 
-- **🎯 Dual Modes:** Toggle between `doc-type: "book"` (for theses with chapters) and `doc-type: "report"` (for semester reports/papers).
+- **🎯 Dual Modes:** Toggle between `doc-type: "book"` (chapters) and `doc-type: "report"` (continuous sections).
 - **🧪 Science-Ready:**
-    - `chem()`: Effortless chemical formulas via `chem[H2O]`.
-    - `wrap-content()`: Advanced figure wrapping where captions intelligently match image widths.
-- **🎨 EPFL Identity:** Includes official Swiss Red color schemes and "Suisse Int'l" font integration.
-- **📚 Modular Structure:** Pre-organized folder structure for sections, references, and appendices.
-- **🔢 Automatic Numbering:** Handles complex appendix numbering (A.1, B.2) automatically.
+    - `chem("H2O")`: Powered by `mhchem` logic for chemical formulas.
+    - `wrap-content()`: Advanced figure wrapping where captions match image widths automatically.
+- **🎨 EPFL Identity:** Official Swiss Red (`#FF0000`) accents and "Suisse Int'l" font integration.
+- **📚 Modular Structure:** Pre-organized folders for sections, bibtex, and appendices.
+- **🔢 Smart Numbering:** Handles complex appendix numbering (e.g., A.1, B.2) out of the box.
 
 ---
 
 ## 📖 Usage Guide
 
-In your `main.typ`, the template is initialized using the `base` show rule:
-
 ```typst
 #import "@preview/modern-epfl-thesis:0.1.0": *
 
 #show: base.with(
-  doc-type: "book", // "book" or "article"
+  doc-type: "book",         // "book" or "report"
   title: "Neural Network Optimization in Cryo-EM",
-  name: "Claude Shannon",
+  author: "Claude Shannon", 
   supervisor: "Prof. Jane Doe",
   date: "December 2023",
 )
 
-// Generate the high-impact cover
+// High-impact cover page
 #makecoverpage(
   title: "Neural Network Optimization", 
   name: "Claude Shannon", 
   img: image("src/epfl/rlc-cover2.jpg")
 )
 
-// Standard institutional title page
 #maketitlepage()
 
-#outline(indent: auto)
-
-= Introduction
-Your research starts here...
+// Example of advanced figure wrapping
+#wrap-content(
+  image("assets/data.png", width: 60%),
+  [This caption will automatically wrap at the 60% width of the image.],
+  [Your paragraph text continues here, flowing beautifully around the figure...]
+)
 ```
 
-### Key Parameters (`base` function)
-| Parameter | Type | Default | Description |
-| :--- | :--- | :--- | :--- |
-| `doc-type` | string | `"book"` | Changes layout between thesis/report styles. |
-| `title` | string | (required) | The main title of your document. |
-| `name` | string | (required) | Your full name. |
-| `accent-color` | color | `rgb("#FF0000")` | The primary theme color (EPFL Red). |
+### Layout Comparison
+| Parameter | `doc-type: "book"` | `doc-type: "report"` |
+| :--- | :--- | :--- |
+| **Hierarchy** | Uses `=` for Chapters | Uses `=` for Sections |
+| **Page Breaks** | New chapter starts on new page | Continuous flow |
+| **Ideal For** | Master/PhD Thesis | Semester Projects / Lab Reports |
 
 ---
 
@@ -99,14 +100,13 @@ Your research starts here...
 ```text
 .
 ├── typst.toml          # Package metadata
-├── src/                # Logic & Assets
+├── src/                # Internal Logic & Assets
 │   ├── lib.typ         # API Entrypoint
-│   ├── template.typ    # Styling & Layout rules
-│   └── epfl/           # Logos (.svg)
-├── template/           # Starter Kit
+│   └── epfl/           # Official Logos (.svg)
+├── template/           # Your Workspace
 │   ├── main.typ        # Main file to compile
 │   ├── references.bib  # Bibliography
-│   └── sections/       # Separate .typ files for chapters
+│   └── sections/       # Chapter files (Introduction.typ, etc.)
 └── README.md
 ```
 
@@ -114,10 +114,10 @@ Your research starts here...
 
 ## ⚠️ Disclaimer & Fonts
 
-*   **Disclaimer:** This project is **not** officially affiliated with EPFL. It is a community-driven tool to help students produce beautiful documents.
-*   **Fonts:** To strictly follow EPFL branding, this template (optionally) uses **Suisse Int'l**. If Suisse Int'l is not installed, the template will fallback to Sagoe UI. To get the official look, please install the Suisse Int'l family from the EPFL website.
+*   **Disclaimer:** This project is **not** officially affiliated with EPFL. 
+*   **Fonts:** For the official look, install **Suisse Int'l**. If not found, the template will fallback to **Segoe UI** (Windows) or **Inter/Linux Libertine**.
 
 ## 📄 License
 
-Based on [EPFL-Report-Template](https://github.com/batuhanfaik/EPFL-Report-Template) and [tudelft-thesis-template](https://github.com/Vector04/tudelft-thesis-template).
+Based on [EPFL-Report-Template](https://github.com/batuhanfaik/EPFL-Report-Template).
 Licensed under the **MIT License**.
