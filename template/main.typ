@@ -4,40 +4,56 @@
 #import "@preview/zero:0.5.0"
 
 
+#let main-font = "Segoe UI" // or any other font you prefer (e.g., "Suisse Int'l" if you want to get the template look.) (Default: "Segoe UI")
+#let math-font = "New Computer Modern Math" // or any other math font you prefer (default: "New Computer Modern Math")
+#let mono-font = "Consolas" // or any other font you prefer (e.g., "Suisse Int'l Mono" if you want to get the template look.) (Default: "Consolas")
+#let doc-type = "book" // report, book
+
+#let thesis-title = "The Title of the Thesis" // Your Thesis Title Here
+#let thesis-subtitle = "The Lab Name / Subtitle Goes Here" // Your Lab or Department Here or Subtitle Here
+#let author-name = "Author Name" // Your Full Name Here
+#let background-img = image("./img/rlc-cover1.jpg") // use image("path/to/your/image.jpg")
+#let portfolio-url = "https://your-portfolio-link.com" // Your Portfolio or Personal Website URL Here
+#let student-number = "123456" // Your Student Number Here
+#let project-duration = "Feb 2025 - June 2025" // Your Project Duration Here
+
+#let supervisor-name = "Prof. Dr. Bugra Koku" // Your Supervisor's Name Here
+#let thesis-committee-names = (
+  [Prof. Dr. Eres Soylemez],
+  [Prof. Dr. Turgut Tumer],
+  [Prof. Dr. Kemal Ozgoren]
+) // Your Thesis Committee Members Here
+
 // 1. Create the Cover Page
 #makecoverpage(
-  title: "Title of The Thesis",
-  subtitle: "The Lab Name / Subtitle Goes Here",
-  name: "Author Name",
-  img: image("./img/rlc-cover1.jpg"), // 'cover_day' or 'cover_night' for EPFL campus images otherwise use image("path/to/your/image.jpg")
-  font-type: "Segoe UI" // or any other font you prefer (e.g., "Suisse Int'l" if you want to get the template look. (Default: "Segoe UI")
+  title: thesis-title,
+  subtitle: thesis-subtitle,
+  name: author-name,
+  img: background-img,
+  font-type: main-font
 )
 
 // 2. Setup the Document Base logic
 #show: base.with(
-  doc-type: "book", // report, book
-  title: "Title of The Thesis",
-  name: "Author Name",
-  main-font: "Segoe UI", // or any other font you prefer (e.g., "Suisse Int'l" if you want to get the template look.) (Default: "Segoe UI")
-  math-font: "New Computer Modern Math", // or any other math font you prefer
-  mono-font: "Consolas", // or any other mono font you prefer (e.g., "Suisse Int'l Mono" if you want the template look.) (default: "Consolas")
+  doc-type: doc-type,
+  title: thesis-title,
+  name: author-name,
+  main-font: main-font,
+  math-font: math-font,
+  mono-font: mono-font,
 )
 
 // 3. Title Page (Interior)
 #maketitlepage(
-  title: "Title of The Thesis",
-  subtitle: "Catchy Subtitle or Lab Here",
-  name: "Author Name",
-  url: "https://your-portfolio-link.com",
-  student-number: "123456",
-  project-duration: "Feb 2024 - June 2024",
-  supervisor: "Prof. Dr. Bugra Koku",
-  thesis-committee: (
-    [Prof. Dr. Eres Soylemez],
-    [Prof. Dr. Turgut Tumer],
-    [Prof. Dr. Kemal Ozgoren]
-  ),
-  font-type: "Segoe UI" // or any other font you prefer (e.g., "Suisse Int'l" if you want to get the template look. (Default: "Segoe UI")
+  title: thesis-title,
+  subtitle: thesis-subtitle,
+  name: author-name,
+  url: portfolio-url,
+  student-number: student-number,
+  project-duration: project-duration,
+  supervisor: supervisor-name,
+  thesis-committee: thesis-committee-names,
+  font-type: main-font
 )
 
 #show: frontmatter
