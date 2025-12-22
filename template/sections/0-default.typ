@@ -1,4 +1,4 @@
-#import "@preview/epfl-thesis:0.1.0": *
+#import "@preview/modern-epfl-thesis:0.1.0": *
 #import "@preview/physica:0.9.6": *
 #import "@preview/unify:0.7.1": num, numrange, qty, qtyrange
 #import "@preview/zero:0.5.0"
@@ -30,10 +30,12 @@ For more imformation on these packages, please consult their documentation.
 Here follows a small overview of equation-related behaviour in this template.
 
 For example, here is a new paragraph containing two aligned equations:
+
 $
   e^(pi i) & = -1 #<eulers_formula> \
     (n+1)! & = integral_0^infinity t^n e^(-t) dif t #<cauchy_factorial>
 $
+
 Here @eulers_formula is Euler's formula, and @cauchy_factorial is Cauchy's formula for a factorial. Note that the ability to refer to them individually is via the `equate` package. Additionally, here is a single-lined equation:
 
 $

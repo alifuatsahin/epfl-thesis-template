@@ -1,4 +1,4 @@
-#import "@preview/epfl-thesis:0.1.0": *
+#import "@preview/modern-epfl-thesis:0.1.0": *
 #import "@preview/physica:0.9.6": *
 #import "@preview/unify:0.7.1": num, numrange, qty, qtyrange
 #import "@preview/zero:0.5.0"
@@ -43,6 +43,8 @@
 #show: frontmatter
 
 #outline(indent: auto)
+// #outline(title: "List of Figures", target: figure.where(kind: image))
+// #outline(title: "List of Tables", target: figure.where(kind: table))
 
 #show: mainmatter
 
@@ -57,7 +59,7 @@
 #bibliography(
   "references.bib",
   title: [References],
-  style: "american-physics-society",
+  style: "ieee",
 )
 
 #show: appendix

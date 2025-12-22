@@ -28,8 +28,8 @@
   math-font: "New Computer Modern Math",
   mono-font: "Consolas",
   accent-color: blue.darken(20%),
-  ref-color: blue,
-  cite-color: olive,
+  ref-color: rgb("#0061A6"),
+  cite-color: rgb("#007070"),
   language: "en",
   region: "GB",
   body,
@@ -39,14 +39,19 @@
   /* --- 1. General Document Setup --- */
   set document(title: title, author: name)
   set text(font: main-font, size: 11pt, lang: language, region: region)
-  
-  // Modern paragraph spacing
+
+  /* --- 1. Paragraph & Typography Setup --- */
   set par(
     justify: true,
-    first-line-indent: 1.8em,
-    spacing: 0.8em,
-    leading: 0.7em,
+    linebreaks: "optimized",
+    
+    first-line-indent: 1.8em, 
+    spacing: 0.8em,          
+    
+    leading: 0.65em,
   )
+
+  set text(costs: (orphan: 100%, widow: 100%))
 
   /* --- 2. Page & Header Setup --- */
   set page(

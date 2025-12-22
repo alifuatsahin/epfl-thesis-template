@@ -1,4 +1,4 @@
-#import "@preview/classy-tudelft-thesis:0.1.0": *
+#import "@preview/modern-epfl-thesis:0.1.0": *
 
 = The first Appendix
 

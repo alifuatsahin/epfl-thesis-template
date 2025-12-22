@@ -1,1 +1,1 @@
-#import "@preview/epfl-thesis:0.1.0": *
+#import "@preview/modern-epfl-thesis:0.1.0": *

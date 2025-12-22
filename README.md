@@ -1,11 +1,11 @@
-# 🎓 Unofficial EPFL Typst Academic Template
+# 🎓 Modern EPFL Thesis (Unofficial Typst Template)
 
 [![Typst Version](https://img.shields.io/badge/Typst-0.12.0+-0074D9.svg)](https://typst.app)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 A professional, modern Typst template for theses, reports, and articles. While styled after the **EPFL (École Polytechnique Fédérale de Lausanne)** visual identity, this is an **unofficial** template and is not endorsed by the institution.
 
-[**View Demo PDF**](#) | [**Report a Bug**](https://github.com/alifuatsahin/epfl-thesis-template/issues)
+[**View Demo PDF**](https://github.com/alifuatsahin/epfl-thesis-template/blob/main/template/main.pdf) | [**Report a Bug**](https://github.com/alifuatsahin/epfl-thesis-template/issues)
 
 ---
 
@@ -25,25 +25,25 @@ The fastest way to start your thesis is using the Typst CLI:
    Clone this repo into your local Typst packages folder:
    ```bash
    # macOS/Linux
-   git clone https://github.com/yourusername/epfl-thesis.git ~/.local/share/typst/packages/preview/epfl-thesis/0.1.0
+   git clone https://github.com/alifuatsahin/epfl-thesis-template.git ~/.local/share/typst/packages/preview/modern-epfl-thesis/0.1.0
    ```
 
 2. **Initialize project:**
    ```bash
-   typst init @preview/epfl-thesis:0.1.0 my-thesis
+   typst init @preview/modern-epfl-thesis:0.1.0 my-thesis
    cd my-thesis
    ```
 
 3. **Compile:**
    ```bash
-   typst watch main.typ --font-path ./src/epfl
+   typst watch main.typ
    ```
 
 ---
 
 ## 🛠 Features
 
-- **🎯 Dual Modes:** Toggle between `doc-type: "book"` (for theses with chapters) and `doc-type: "article"` (for semester reports/papers).
+- **🎯 Dual Modes:** Toggle between `doc-type: "book"` (for theses with chapters) and `doc-type: "report"` (for semester reports/papers).
 - **🧪 Science-Ready:**
     - `chem()`: Effortless chemical formulas via `chem[H2O]`.
     - `wrap-content()`: Advanced figure wrapping where captions intelligently match image widths.
@@ -58,7 +58,7 @@ The fastest way to start your thesis is using the Typst CLI:
 In your `main.typ`, the template is initialized using the `base` show rule:
 
 ```typst
-#import "@preview/epfl-thesis:0.1.0": *
+#import "@preview/modern-epfl-thesis:0.1.0": *
 
 #show: base.with(
   doc-type: "book", // "book" or "article"
@@ -89,7 +89,7 @@ Your research starts here...
 | :--- | :--- | :--- | :--- |
 | `doc-type` | string | `"book"` | Changes layout between thesis/report styles. |
 | `title` | string | (required) | The main title of your document. |
-| `author` | string | (required) | Your full name. |
+| `name` | string | (required) | Your full name. |
 | `accent-color` | color | `rgb("#FF0000")` | The primary theme color (EPFL Red). |
 
 ---
@@ -102,7 +102,7 @@ Your research starts here...
 ├── src/                # Logic & Assets
 │   ├── lib.typ         # API Entrypoint
 │   ├── template.typ    # Styling & Layout rules
-│   └── epfl/           # Fonts (.otf) and Logos (.svg)
+│   └── epfl/           # Logos (.svg)
 ├── template/           # Starter Kit
 │   ├── main.typ        # Main file to compile
 │   ├── references.bib  # Bibliography
@@ -115,7 +115,7 @@ Your research starts here...
 ## ⚠️ Disclaimer & Fonts
 
 *   **Disclaimer:** This project is **not** officially affiliated with EPFL. It is a community-driven tool to help students produce beautiful documents.
-*   **Fonts:** To strictly follow EPFL branding, this template (optionally) uses **Suisse Int'l**.
+*   **Fonts:** To strictly follow EPFL branding, this template (optionally) uses **Suisse Int'l**. If Suisse Int'l is not installed, the template will fallback to Sagoe UI. To get the official look, please install the Suisse Int'l family from the EPFL website.
 
 ## 📄 License
 
