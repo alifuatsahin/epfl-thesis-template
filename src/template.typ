@@ -109,12 +109,12 @@
   // Level 2 & 3 Styling
   show heading.where(level: 2): it => {
     if not is-book { return it }
-    set text(size: 1.3em, weight: "bold", font: main-font)
+    set text(size: 1.3em, weight: "bold", font: main-font, hyphenate: false)
     it
   }
   show heading.where(level: 3): it => {
     if not is-book { return it }
-    set text(size: 1.1em, weight: "semibold", font: main-font)
+    set text(size: 1.1em, weight: "semibold", font: main-font, hyphenate: false)
     it
   }
 
