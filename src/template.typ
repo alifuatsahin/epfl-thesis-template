@@ -134,12 +134,13 @@
         
         align(right)[
           #if it.numbering != none {
-            set text(size: 6em, weight: "bold", font: main-font)
+            set text(size: 6em, weight: "bold", font: main-font, hyphenate: false)
             counter(heading).display(it.numbering)
           }
 
           #block(width: 100%)[
-            #set text(size: 2em, weight: "bold")
+            #set par(justify: false)
+            #set text(size: 2em, weight: "bold", font: main-font, hyphenate: false)
             #it.body
           ]
         ]
