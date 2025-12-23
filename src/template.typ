@@ -110,10 +110,12 @@
   show heading.where(level: 2): it => {
     if not is-book { return it }
     set text(size: 1.3em, weight: "bold", font: main-font)
+    it
   }
   show heading.where(level: 3): it => {
     if not is-book { return it }
     set text(size: 1.1em, weight: "semibold", font: main-font)
+    it
   }
 
   // Chapter Logic (Level 1)
@@ -223,7 +225,15 @@
   /* --- 7. Table of Contents (Outline) --- */
   show outline.entry.where(level: 1): it => {
     v(1.5em, weak: true)
-    strong(it)
+    
+    // Check if the entry is pointing to a heading.
+    // Figures and Tables will have a different 'func' (element type).
+    if it.element.func() == heading {
+      strong(it)
+    } else {
+      // This will apply to Figures and Tables in their outlines
+      it
+    }
   }
   
   set outline(indent: 2em)

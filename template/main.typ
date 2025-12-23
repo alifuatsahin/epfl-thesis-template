@@ -69,8 +69,8 @@
 #show: frontmatter
 
 #outline(indent: auto)
-// #outline(title: "List of Figures", target: figure.where(kind: image))
-// #outline(title: "List of Tables", target: figure.where(kind: table))
+#outline(title: "List of Figures", target: figure.where(kind: image)) // Comment out this line if you don't have figures (or don't want to have a list of figures)
+#outline(title: "List of Tables", target: figure.where(kind: table)) // Comment out this line if you don't have tables (or don't want to have a list of tables)
 
 #show: mainmatter
 
