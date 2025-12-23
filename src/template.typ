@@ -163,14 +163,25 @@
     let el = it.element
     if el == none { return it }
     
-    // Auto-parentheses for equations
+    // 1. Handle Equations
     if el.func() == math.equation {
-      link(it.target)[#text(fill: ref-color)[(#it.target)]]
-    } else {
-      // Color the number part of the reference
+      // Get the number (which already includes parentheses from your eq-num rule)
+      let num = numbering(
+        el.numbering,
+        ..counter(math.equation).at(el.location())
+      )
+      
       let supp = el.supplement
-      let num = context numbering(el.numbering, ..counter(heading).at(it.target))
-      link(it.target)[#supp~#text(fill: ref-color, num)]
+      
+      link(el.location())[
+        #supp~#text(fill: ref-color)[#num]
+      ]
+    } 
+    // 2. Handle everything else (Figures, Tables, Headings)
+    else {
+      let supp = el.supplement
+      let num = numbering(el.numbering, ..counter(el.func()).at(el.location()))
+      link(el.location())[#supp~#text(fill: ref-color, num)]
     }
   }
 
@@ -178,8 +189,7 @@
   let figure-gap = 1.5em // Adjust this for more/less space around images
 
   show figure: it => {
-    set align(center)
-    
+    set align(center)    
     // 1. Logic for figures with NO placement (inline in text)
     if it.placement == none {
       block(width: 100%, inset: (y: figure-gap))[
@@ -215,13 +225,6 @@
 
   // Table captions on top, others on bottom
   show figure.where(kind: table): set figure.caption(position: top)
-  
-  show figure: it => {
-    set align(center)
-    v(1em)
-    it
-    v(1em)
-  }
 
   /* --- 7. Table of Contents (Outline) --- */
   show outline.entry.where(level: 1): it => {
@@ -250,9 +253,9 @@
   )
 
   /* --- 9. Math Equation Formatting --- */
+  set math.equation(supplement: "Eq.")
   show math.equation: set text(font: math-font, size: normal)
   show: equate.with(breakable: false, sub-numbering: false)
-  set math.equation(supplement: "Eq.")
 
   body
 }
