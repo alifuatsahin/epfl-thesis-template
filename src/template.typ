@@ -35,6 +35,8 @@
   body,
 ) = {
   let is-book = doc-type == "book"
+
+  show <nonumber>: set heading(numbering: none)
   
   /* --- 1. General Document Setup --- */
   set document(title: title, author: name)
@@ -520,6 +522,8 @@
 
 #let mainmatter(body) = {
   is-main-matter.update(true)
+  show heading.where(level: 2): set heading(outlined: true)
+  show heading.where(level: 3): set heading(outlined: true)
   pagebreak(weak: true)
   counter(page).update(1)
   set page(numbering: "1", footer: none)
@@ -528,6 +532,8 @@
 
 #let frontmatter(body) = {
   is-main-matter.update(false)
+  show heading.where(level: 2): set heading(outlined: false)
+  show heading.where(level: 3): set heading(outlined: false)
   pagebreak(weak: true)
   counter(page).update(1)
   set page(numbering: "i")
