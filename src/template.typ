@@ -259,6 +259,32 @@
   show math.equation: set text(font: math-font, size: normal)
   show: equate.with(breakable: false, sub-numbering: false)
 
+  // the "Grouped Reference" handler
+  show math.equation.where(block: true): it => {
+    let label-str = if it.has("label") { str(it.label) } else { "" }
+    
+    if label-str.starts-with("eqgrp:") {
+      grid(
+        columns: (1fr, auto, 1fr),
+        column-gutter: 0pt,
+        align: horizon,
+        [],             // Left spacer
+        
+        math.equation(it.body, block: true, numbering: none), 
+        
+        // The number on the right
+        align(right, context {
+          let num = counter(math.equation).display(it.numbering)
+          [#num]
+        })
+      )
+      // Manually increment the counter for this block
+      counter(math.equation).step()
+    } else {
+      it
+    }
+  }
+
   body
 }
 
