@@ -278,8 +278,6 @@
           [#num]
         })
       )
-      // Manually increment the counter for this block
-      counter(math.equation).step()
     } else {
       it
     }
