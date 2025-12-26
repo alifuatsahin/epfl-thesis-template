@@ -161,29 +161,36 @@
     it
   }
 
-  show ref: it => {
+  show ref: it => context {
     let el = it.element
     if el == none { return it }
-    
-    // 1. Handle Equations
-    if el.func() == math.equation {
-      // Get the number (which already includes parentheses from your eq-num rule)
+
+    // 1. Handle Page References
+    if it.form == "page" {
+      let loc = el.location()
+      let num = counter(page).at(loc).first()
+      let supp = if it.supplement == auto { [page] } else { it.supplement }
+      
+      link(loc)[#supp~#text(fill: ref-color)[#num]]
+    } 
+    // 2. Handle Equations
+    else if el.func() == math.equation {
+      let loc = el.location()
       let num = numbering(
         el.numbering,
-        ..counter(math.equation).at(el.location())
+        ..counter(math.equation).at(loc)
       )
+      let supp = if it.supplement != auto { it.supplement } else { el.supplement }
       
-      let supp = el.supplement
-      
-      link(el.location())[
-        #supp~#text(fill: ref-color)[#num]
-      ]
+      link(loc)[#supp~#text(fill: ref-color)[#num]]
     } 
-    // 2. Handle everything else (Figures, Tables, Headings)
+    // 3. Handle everything else (Figures, Tables, Headings)
     else {
-      let supp = el.supplement
-      let num = numbering(el.numbering, ..counter(el.func()).at(el.location()))
-      link(el.location())[#supp~#text(fill: ref-color, num)]
+      let loc = el.location()
+      let supp = if it.supplement != auto { it.supplement } else { el.supplement }
+      let num = numbering(el.numbering, ..counter(el.func()).at(loc))
+      
+      link(loc)[#supp~#text(fill: ref-color, num)]
     }
   }
 
