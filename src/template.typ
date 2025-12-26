@@ -349,6 +349,7 @@
   title: "Document Title",
   subtitle: none,
   name: none,
+  school: school,
   font-type: "Segoe UI",
   img: cover_night,
   accent-fill: rgb(0, 0, 0, 120), // 120/255 opacity
