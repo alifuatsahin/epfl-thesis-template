@@ -28,7 +28,7 @@
   math-font: "New Computer Modern Math",
   mono-font: "Consolas",
   accent-color: blue.darken(20%),
-  ref-color: rgb("#0061A6"),
+  ref-color: rgb("#010101"), // rgb("#0061A6"),
   cite-color: rgb("#007070"),
   language: "en",
   region: "GB",
@@ -163,7 +163,7 @@
 
   show ref: it => {
     if it.supplement == none {
-      return text(fill: ref-color, it)
+      return text(fill: ref-color, it, font: main-font)
     }
 
     let el = it.element
