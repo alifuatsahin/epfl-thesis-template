@@ -161,36 +161,26 @@
     it
   }
 
-  show ref: it => context {
+  show ref: it => {
+    if it.supplement == none {
+      return text(fill: ref-color, it)
+    }
+
     let el = it.element
     if el == none { return it }
 
-    // 1. Handle Page References
-    if it.form == "page" {
-      let loc = el.location()
-      let num = counter(page).at(loc).first()
-      let supp = if it.supplement == auto { [page] } else { it.supplement }
-      
-      link(loc)[#supp~#text(fill: ref-color)[#num]]
-    } 
-    // 2. Handle Equations
-    else if el.func() == math.equation {
-      let loc = el.location()
-      let num = numbering(
-        el.numbering,
-        ..counter(math.equation).at(loc)
-      )
-      let supp = if it.supplement != auto { it.supplement } else { el.supplement }
-      
-      link(loc)[#supp~#text(fill: ref-color)[#num]]
-    } 
-    // 3. Handle everything else (Figures, Tables, Headings)
-    else {
-      let loc = el.location()
-      let supp = if it.supplement != auto { it.supplement } else { el.supplement }
-      let num = numbering(el.numbering, ..counter(el.func()).at(loc))
-      
-      link(loc)[#supp~#text(fill: ref-color, num)]
+    context {
+      let supp = if it.supplement != auto {
+        it.supplement // User provided custom supplement: @label[Supp]
+      } else if it.form == "page" {
+        [page]       // Match Version 1: Force "page" for page refs
+      } else if el.has("supplement") {
+        el.supplement // Use default: "Figure", "Table", etc.
+      } else {
+        ""
+      }
+
+      link(el.location())[#if supp not in ("", []) [#supp~]#ref(it.target, supplement: none, form: it.form)]
     }
   }
 

@@ -2,13 +2,14 @@
 #import "@preview/physica:0.9.6": *
 #import "@preview/unify:0.7.1": num, numrange, qty, qtyrange
 #import "@preview/zero:0.5.0"
+#import "@preview/subpar:0.2.2"
 
 = Introduction
 
 This chapter summarizes the extra features available in this template.
 
 == Packages included
-When first importing this template (during ```typ #import "@preview/classy-tudelft-thesis:0.1.0": *```)
+When first importing this template (during ```typ #import "@preview/modern-epfl-thesis:0.1.0": *```)
 at the top of `main.typ`, several imports occur. These are:
 - `wrap-it`, version `0.1.1`. The function here are used, and slightly modified for proper caption sizing.
 - `equate`, version `0.3.2`. Is imported to enable multi-line equation numbering out of the box, and sets the defaults ```typc  show: equate.with(breakable: false, sub-numbering: false)```. For more information, please visit the documentation of `equate`.
@@ -93,6 +94,20 @@ Tables and images can be inserted into the document via the `#figure` function. 
     caption: "A small table.",
   )
 ]
+
+#subpar.grid(
+  figure(image("../img/campus.jpg"), caption: [
+    An image of the andromeda galaxy.
+  ]), <a>,
+  figure(image("../img/campus.jpg"), caption: [
+    A sunset illuminating the sky above a mountain range.
+  ]), <b>,
+  columns: (1fr, 1fr),
+  caption: [A figure composed of two sub figures.],
+  label: <full>,
+)
+
+Above in @full, we see a figure which is composed of two other figures, namely @a and @b.
 
 == Referencing stuff <sec:refs>
 
