@@ -188,29 +188,17 @@
   let figure-gap = 1.5em // Adjust this for more/less space around images
 
   show figure: it => {
-    set align(center)    
-    // 1. Logic for figures with NO placement (inline in text)
+    set align(center)
+    
     if it.placement == none {
-      block(width: 100%, inset: (y: figure-gap))[
-        #it
-      ]
-    } 
-    // 2. Logic for figures forced to the TOP
-    else if it.placement == top {
-      // We only want spacing at the BOTTOM to push text away
-      block(width: 100%, inset: (bottom: figure-gap))[
-        #it
-      ]
-    } 
-    // 3. Logic for figures forced to the BOTTOM
-    else if it.placement == bottom {
-      // We only want spacing at the TOP to push text away from the figure
-      block(width: 100%, inset: (top: figure-gap))[
-        #it
-      ]
-    } 
-    else {
-      it
+      block(width: 100%, inset: (y: figure-gap))[#it]
+    } else {
+      place(
+        it.placement, 
+        float: true, 
+        clearance: figure-gap, // This handles the gap automatically
+        block(width: 100%)[#it]
+      )
     }
   }
 
