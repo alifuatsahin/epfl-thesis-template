@@ -14,6 +14,7 @@
 #let author-name = "Author Name" // Your Full Name Here
 #let background-img = image("./img/rlc-cover1.jpg") // use image("path/to/your/image.jpg")
 #let portfolio-url = "https://your-portfolio-link.com" // Your Portfolio or Personal Website URL Here
+#let url-name = none // The text to display for the URL Here (e.g., "My Portfolio") (Leave as 'none' to display the URL itself)
 #let student-number = "123456" // Your Student Number Here
 #let project-duration = "Feb 2025 - June 2025" // Your Project Duration Here
 #let degree = "Master of Science in Mechanical Engineering" // Your Degree Here
@@ -55,6 +56,7 @@
   subtitle: thesis-subtitle,
   name: author-name,
   url: portfolio-url,
+  url-text: url-name,
   student-number: student-number,
   project-duration: project-duration,
   supervisors: supervisor-names,

@@ -394,8 +394,9 @@
   subtitle: none,
   name: "Author Name",
   degree: "Master of Science in Mechanical Engineering",
-  school: "École polytechnique fédérale de Lausanne",
+  school: school,
   url: none,
+  url-text: none,
   defense-date: datetime.today().display("[day] [month repr:long] [year]"),
   student-number: none,
   project-duration: none,
@@ -514,13 +515,16 @@
     #v(1.5fr)
     
     // 3. Footer / URL / Logo
-    #if url != none {
-      text(size: 9pt, fill: gray.darken(30%), font: font-type)[
-        #publicity-statement #link(url)
-      ]
-    } else {
-      text(size: 9pt, fill: gray.darken(30%), font: font-type)[#publicity-statement]
-    }
+    #text(size: 9pt, fill: gray.darken(30%), font: font-type)[
+      #publicity-statement
+      #if url != none {
+        if url-text != none {
+          link(url)[#url-text]
+        } else {
+          link(url)[#url]
+        }
+      }
+    ]
     
     #v(2em)
     
